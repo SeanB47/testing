@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dice Roller</title>
+  <style>
+    body {
+      background-color: #A3C8FF;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+    h1 {
+      font-size: 50px;
+      background-color: #F1D1C1;
+      color: white;
+      padding: 20px;
+      border: 5px ridge white;
+      display: inline-block;
+      margin-top: 30px;
+    }
+    #counter {
+      font-size: 30px;
+      margin: 20px 0;
+    }
+    .dice-buttons img {
+      width: 200px;
+      margin: 20px;
+      cursor: pointer;
+    }
+    #result {
+      font-size: 40px;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dice Roller</h1>
+  <div id="result">Choose your dice 🎲</div>
+  <div id="counter">Total dice rolled: 0</div>
+
+  <div class="dice-buttons">
+    <img src="1roll.png" onclick="rollOneDie()" alt="Roll One">
+    <img src="2roll.png" onclick="rollTwoDice()" alt="Roll Two">
+  </div>
+
+  <audio id="rollSound" src="rolling_sound.wav" preload="auto"></audio>
+
+  <script>
+    let totalRolls = 0;
+
+    function playSound() {
+      document.getElementById("rollSound").play();
+    }
+
+    function updateCounter(n) {
+      totalRolls += n;
+      document.getElementById("counter").innerText = `Total dice rolled: ${totalRolls}`;
+    }
+
+    function rollOneDie() {
+      playSound();
+      const roll = Math.floor(Math.random() * 6) + 1;
+      document.getElementById("result").innerText = `You rolled a ${roll} 🎲`;
+      updateCounter(1);
+    }
+
+    function rollTwoDice() {
+      playSound();
+      const roll1 = Math.floor(Math.random() * 6) + 1;
+      const roll2 = Math.floor(Math.random() * 6) + 1;
+      const total = roll1 + roll2;
+      document.getElementById("result").innerText = `You rolled ${roll1} + ${roll2} = ${total} 🎲🎲`;
+      updateCounter(2);
+    }
+  </script>
+
+</body>
+</html>
